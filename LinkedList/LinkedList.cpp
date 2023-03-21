@@ -23,7 +23,7 @@ public:
     uint32_t Count() const;
     bool Contains(const ItemType& item) const;
     uint32_t IndexOf(const ItemType& item) const; // declaration of IndexOf function
-
+    void RemoveAt(uint32_t index);
 
 private:
     struct Node
@@ -143,6 +143,7 @@ ItemType LinkedList<ItemType>::Remove(const ItemType& item)
     return ItemType{};
 }
 
+
 template <typename ItemType>
 void LinkedList<ItemType>::Clear()
 {
@@ -198,6 +199,40 @@ uint32_t LinkedList<ItemType>::Count() const
     }
     return count;
 }
+
+template <typename ItemType>
+void LinkedList<ItemType>::RemoveAt(uint32_t index)
+{
+    if (index >= Count()) {
+        // index out of range, do nothing
+        return;
+    }
+
+    Node* nodeToRemove = getNodeAt(index);
+
+    if (nodeToRemove == firstNode) {
+        // remove the first node
+        firstNode = nodeToRemove->next;
+        if (firstNode != nullptr) {
+            firstNode->previous = nullptr;
+        }
+    }
+    else if (nodeToRemove == lastNode) {
+        // remove the last node
+        lastNode = nodeToRemove->previous;
+        if (lastNode != nullptr) {
+            lastNode->next = nullptr;
+        }
+    }
+    else {
+        // remove a node in the middle
+        nodeToRemove->previous->next = nodeToRemove->next;
+        nodeToRemove->next->previous = nodeToRemove->previous;
+    }
+
+    delete nodeToRemove;
+}
+
 
 
 int main()
