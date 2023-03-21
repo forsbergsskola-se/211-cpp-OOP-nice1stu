@@ -34,8 +34,7 @@ private:
 
         Node(const ItemType& item, Node* nextNode = nullptr, Node* previousNode = nullptr)
             : next(nextNode), previous(previousNode), data(item)
-        {
-        }
+        {}
     };
 
 
@@ -203,35 +202,18 @@ uint32_t LinkedList<ItemType>::Count() const
 template <typename ItemType>
 void LinkedList<ItemType>::RemoveAt(uint32_t index)
 {
-    if (index >= Count()) {
-        // index out of range, do nothing
-        return;
-    }
+    if (index >= Count()) return;
 
-    Node* nodeToRemove = getNodeAt(index);
+    auto* nodeToRemove = getNodeAt(index);
+    auto* prevNode = nodeToRemove->previous;
+    auto* nextNode = nodeToRemove->next;
 
-    if (nodeToRemove == firstNode) {
-        // remove the first node
-        firstNode = nodeToRemove->next;
-        if (firstNode != nullptr) {
-            firstNode->previous = nullptr;
-        }
-    }
-    else if (nodeToRemove == lastNode) {
-        // remove the last node
-        lastNode = nodeToRemove->previous;
-        if (lastNode != nullptr) {
-            lastNode->next = nullptr;
-        }
-    }
-    else {
-        // remove a node in the middle
-        nodeToRemove->previous->next = nodeToRemove->next;
-        nodeToRemove->next->previous = nodeToRemove->previous;
-    }
+    prevNode ? prevNode->next = nextNode : firstNode = nextNode;
+    nextNode ? nextNode->previous = prevNode : lastNode = prevNode;
 
     delete nodeToRemove;
 }
+
 
 
 
