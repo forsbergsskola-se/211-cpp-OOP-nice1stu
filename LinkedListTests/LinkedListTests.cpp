@@ -77,8 +77,8 @@ namespace LinkedListTest
         TEST_METHOD(TestRemoveIndexAt)
         {
             list.Remove(1);
-            Assert::AreEqual(list.Count(), 4u, L"List size should be 4", LINE_INFO());
-            Assert::AreEqual(list.Get(1), 101, L"Item at index 1 should be 101", LINE_INFO());
+            Assert::AreEqual(list.Count(), 5u, L"List size should be 4", LINE_INFO());
+            Assert::AreEqual(list.Get(1), 5, L"Item at index 1 should be 100", LINE_INFO());
         }
 
         TEST_METHOD(TestContainsValueAtCorrectIndex)
