@@ -87,35 +87,35 @@ namespace LinkedListTest
             Assert::IsFalse(list.Contains(4), L"List should not contain 4", LINE_INFO());
         }
 
-        TEST_METHOD(IndexOf_ExistingItem_ReturnsCorrectIndex)
+        TEST_METHOD(IndexOfExistingItemReturnsCorrectIndex)
         {
             int itemToFind = 100;
             uint32_t index = list.IndexOf(itemToFind);
             Assert::AreEqual((uint32_t)2, index);
         }
 
-        TEST_METHOD(IndexOf_FirstItem_ReturnsCorrectIndex)
+        TEST_METHOD(IndexOfFirstItemReturnsCorrectIndex)
         {
             int itemToFind = 13;
             uint32_t index = list.IndexOf(itemToFind);
             Assert::AreEqual((uint32_t)0, index);
         }
 
-        TEST_METHOD(IndexOf_LastItem_ReturnsCorrectIndex)
+        TEST_METHOD(IndexOfLastItemReturnsCorrectIndex)
         {
             int itemToFind = 69;
             uint32_t index = list.IndexOf(itemToFind);
             Assert::AreEqual((uint32_t)4, index);
         }
 
-        TEST_METHOD(IndexOf_NonExistingItem_ReturnsMinusOne)
+        TEST_METHOD(IndexOfNonExistingItemReturnsMinusOne)
         {
             int itemToFind = 123;
             uint32_t index = list.IndexOf(itemToFind);
             Assert::AreEqual((uint32_t)-1, index);
         }
 
-        TEST_METHOD(Remove_ExistingItem_RemovesItemFromList)
+        TEST_METHOD(RemoveExistingItemRemovesItemFromList)
         {
             int itemToRemove = 100;
             int removedItem = list.Remove(itemToRemove);
@@ -124,7 +124,7 @@ namespace LinkedListTest
             Assert::IsFalse(list.Contains(itemToRemove));
         }
 
-        TEST_METHOD(Remove_FirstItem_RemovesItemFromList)
+        TEST_METHOD(RemoveFirstItemRemovesItemFromList)
         {
             int itemToRemove = 13;
             int removedItem = list.Remove(itemToRemove);
@@ -133,7 +133,7 @@ namespace LinkedListTest
             Assert::IsFalse(list.Contains(itemToRemove));
         }
 
-        TEST_METHOD(Remove_LastItem_RemovesItemFromList)
+        TEST_METHOD(RemoveLastItemRemovesItemFromList)
         {
             int itemToRemove = 69;
             int removedItem = list.Remove(itemToRemove);
@@ -142,7 +142,7 @@ namespace LinkedListTest
             Assert::IsFalse(list.Contains(itemToRemove));
         }
 
-        TEST_METHOD(Remove_NonExistingItem_ReturnsDefaultValue)
+        TEST_METHOD(RemoveNonExistingItemReturnsDefaultValue)
         {
             int itemToRemove = 123;
             int removedItem = list.Remove(itemToRemove);
