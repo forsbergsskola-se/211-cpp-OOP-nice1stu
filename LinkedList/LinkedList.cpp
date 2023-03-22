@@ -4,7 +4,6 @@
 #include <vector>
 #include <cstddef>
 
-
 using namespace std;
 
 template <typename ItemType>
@@ -20,9 +19,9 @@ public:
     void Set(uint32_t index, const ItemType& item);
     ItemType Remove(const ItemType& item);
     void Clear();
-    uint32_t Count() const;
+    uint32_t IndexOf(const ItemType& item) const;
     bool Contains(const ItemType& item) const;
-    uint32_t IndexOf(const ItemType& item) const; // declaration of IndexOf function
+    uint32_t Count() const;
     void RemoveAt(uint32_t index);
 
 private:
@@ -66,7 +65,7 @@ typename LinkedList<ItemType>::Node* LinkedList<ItemType>::makeNode(const ItemTy
 template <typename ItemType>
 void LinkedList<ItemType>::Add(const ItemType& item)
 {
-    Node* node = makeNode(item);
+    auto* node = makeNode(item);
 
     if (firstNode == nullptr)
     {
@@ -93,36 +92,32 @@ void LinkedList<ItemType>::MultiAdd(const vector<ItemType>& items)
 template <typename ItemType>
 typename LinkedList<ItemType>::Node* LinkedList<ItemType>::getNodeAt(uint32_t index) const
 {
-    Node* current = firstNode;
-    for (uint32_t i = 0; i < index; i++)
+    auto* current = firstNode;
+    for (uint32_t i = 0; i < index && current != nullptr; i++)
     {
-        if (current == nullptr)
-        {
-            throw out_of_range("Index out of range");
-        }
         current = current->next;
     }
-    return current;
+    return (current != nullptr ? current : throw out_of_range("Index out of range"));
 }
 
 template <typename ItemType>
 ItemType LinkedList<ItemType>::Get(uint32_t index) const
 {
-    Node* node = getNodeAt(index);
+    auto* node = getNodeAt(index);
     return node->data;
 }
 
 template <typename ItemType>
 void LinkedList<ItemType>::Set(uint32_t index, const ItemType& item)
 {
-    Node* node = getNodeAt(index);
+    auto* node = getNodeAt(index);
     node->data = item;
 }
 
 template <typename ItemType>
 ItemType LinkedList<ItemType>::Remove(const ItemType& item)
 {
-    Node* current = firstNode;
+    auto* current = firstNode;
     while (current != nullptr)
     {
         if (current->data == item)
@@ -137,19 +132,16 @@ ItemType LinkedList<ItemType>::Remove(const ItemType& item)
         }
         current = current->next;
     }
-
-    // item not found
     return ItemType{};
 }
-
 
 template <typename ItemType>
 void LinkedList<ItemType>::Clear()
 {
-    Node* current = firstNode;
+    auto* current = firstNode;
     while (current != nullptr)
     {
-        Node* next = current->next;
+        auto* next = current->next;
         delete current;
         current = next;
     }
@@ -162,7 +154,7 @@ uint32_t LinkedList<ItemType>::IndexOf(const ItemType& item) const
 
 {
     Node* current = firstNode;
-    int index = 0;
+    auto index = 0;
     while (current != nullptr)
     {
         if (current->data == item) return index;
@@ -172,11 +164,10 @@ uint32_t LinkedList<ItemType>::IndexOf(const ItemType& item) const
     return -1;
 }
 
-
 template <typename ItemType>
 bool LinkedList<ItemType>::Contains(const ItemType& item) const
 {
-    Node* current = firstNode;
+    auto* current = firstNode;
     while (current != nullptr)
     {
         if (current->data == item) return true;
@@ -190,7 +181,7 @@ template <typename ItemType>
 uint32_t LinkedList<ItemType>::Count() const
 {
     uint32_t count = 0;
-    Node* current = firstNode;
+    auto* current = firstNode;
     while (current != nullptr)
     {
         count++;
@@ -214,37 +205,7 @@ void LinkedList<ItemType>::RemoveAt(uint32_t index)
     delete nodeToRemove;
 }
 
-
-
-
 int main()
 {
-    LinkedList<int> myLinkedList;
-    myLinkedList.Add(1);
-    myLinkedList.Add(2);
-    myLinkedList.Add(3);
-    cout << "Linked List contains: " << myLinkedList.Count() << " elements." << endl;
-
-    int firstItem = myLinkedList.Get(0);
-    cout << "First Item: " << firstItem << endl;
-
-    int removedItem = myLinkedList.Remove(2);
-    cout << "Removed Item: " << removedItem << endl;
-
-    myLinkedList.Set(1, 4);
-
-    int index = myLinkedList.IndexOf(4);
-    if (index != -1) {
-        cout << "Item found at index: " << index << endl;
-    }
-
-    bool containsItem = myLinkedList.Contains(3);
-    if (containsItem) {
-        cout << "Linked List contains the item 3." << endl;
-    }
-
-    myLinkedList.Clear();
-    cout << "Linked List cleared." << endl;
-
     return 0;
 }
