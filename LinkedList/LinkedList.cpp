@@ -13,7 +13,7 @@ public:
     LinkedList();
     ~LinkedList();
 
-    void Add(const ItemType& item);
+    void Emplace(const ItemType& item);
     void MultiAdd(const vector<ItemType>& items);
     ItemType Get(uint32_t index) const;
     void Set(uint32_t index, const ItemType& item);
@@ -63,7 +63,7 @@ typename LinkedList<ItemType>::Node* LinkedList<ItemType>::makeNode(const ItemTy
 }
 
 template <typename ItemType>
-void LinkedList<ItemType>::Add(const ItemType& item)
+void LinkedList<ItemType>::Emplace(const ItemType& item)
 {
     auto* node = makeNode(item);
 
@@ -85,7 +85,7 @@ void LinkedList<ItemType>::MultiAdd(const vector<ItemType>& items)
 {
     for (const ItemType& item : items)
     {
-        Add(item);
+        Emplace(item);
     }
 }
 

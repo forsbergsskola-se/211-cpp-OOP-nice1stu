@@ -15,11 +15,11 @@ namespace LinkedListTest
     public:
         void SetUpStdList()
         {
-            list.Add(13);
-            list.Add(5);
-            list.Add(100);
-            list.Add(101);
-            list.Add(69);
+            list.Emplace(13);
+            list.Emplace(5);
+            list.Emplace(100);
+            list.Emplace(101);
+            list.Emplace(69);
         }
 
         void ClearStdList()
@@ -40,7 +40,7 @@ namespace LinkedListTest
         TEST_METHOD(TestAddOne)
         {
             Assert::AreEqual(list.Count(), 5u, L"List size should be 5", LINE_INFO());
-            list.Add(4);
+            list.Emplace(4);
             Assert::AreEqual(list.Count(), 6u, L"List size should be 6", LINE_INFO());
         }
 
