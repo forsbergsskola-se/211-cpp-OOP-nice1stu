@@ -76,12 +76,12 @@ int main()
     return 0;
 }
 
-public:
-    StringClassExercise() : buffer(new char[256]), length(0), maxSize(256)
-    {
-        cout << "Constructing empty string\n";
-        buffer[0] = '\0';
-    }
+StringClassExercise() : buffer(new char[256]), length(0), maxSize(256)
+{
+    cout << "Constructing empty string\n";
+    buffer[0] = '\0';
+}
+
 
     StringClassExercise(size_t maxSize) : buffer(new char[maxSize]), length(0), maxSize(maxSize)
     {
@@ -176,6 +176,7 @@ public:
 };
 
 ostream& operator<<(ostream& os, const StringClassExercise& string)
+{
     os << string.getString();
     return os;
 }
