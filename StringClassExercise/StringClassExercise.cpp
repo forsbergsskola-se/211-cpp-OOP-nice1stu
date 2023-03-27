@@ -125,7 +125,6 @@ public:
         length += strlen(text);
     }
 
-
     void appendLine(const char* text)
     {
         length + strlen(text) >= maxSize ? throw runtime_error("String would exceed max size!") : void();
@@ -134,7 +133,7 @@ public:
         length += strlen(text) + 1;
     }
 
-    void print()
+    void print() const
     {
         cout << "Current string: \"" << buffer << "\"\n";
     }
@@ -143,11 +142,9 @@ public:
     {
         return buffer;
     }
-
 };
 
 ostream& operator<<(ostream& os, const StringClassExercise& string)
-{
     os << string.getString();
     return os;
 }
