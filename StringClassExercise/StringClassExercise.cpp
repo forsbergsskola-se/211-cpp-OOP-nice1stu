@@ -185,15 +185,6 @@ int main()
         {
             cerr << "Error: " << e.what() << endl;
         }
-
-        StringClassExercise emptyText;
-        cout << "text6 (empty): " << emptyText.getString() << endl;
-
-        StringClassExercise copiedEmpty = emptyText;
-        cout << "text7 (empty): " << copiedEmpty.getString() << endl;
-
-        StringClassExercise movedEmpty = move(emptyText);
-        cout << "text8 (empty): " << movedEmpty.getString() << endl;
     }
     catch (const exception& e)
     {
