@@ -12,7 +12,7 @@ class DynamicArray
 private:
     T* data;
     size_t size;
-    size_t maxSize;
+    size_t count;
 
 public:
     DynamicArray(size_t maxSize) : data(new T[maxSize]), size(0), maxSize(maxSize) {}
@@ -24,7 +24,7 @@ public:
 
     void add(const T& element)
     {
-        size == maxSize ? throw runtime_error("Array is full!") : data[size++] = element;
+        size == maxSize ? resize() : data[++size] = element;
     }
 
     const T& get(size_t index) const
