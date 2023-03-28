@@ -1,58 +1,73 @@
 #include <iostream>
 #include <cstring>
 #include <stdexcept>
-#include <cstdio>
-#include "Header.h"
 
 using namespace std;
 
 template<typename T>
 class DynamicArray
 {
-    private:
-        T* data;
-        size_t size;
-        size_t count;
+private:
+    T* data;
+    size_t size;
+    size_t count;
 
-    public:
-        DynamicArray(size_t count) : data(new T[count]), size(0), count(count) {}
+public:
+    DynamicArray(size_t count) : data(new T[count]), size(0), count(count) {}
 
-        ~DynamicArray()
+    ~DynamicArray()
+    {
+        delete[] data;
+    }
+
+    void add(const T& element)
+    {
+        if (size == count)
         {
-            delete[] data;
+            resize();
         }
+        data[size++] = element;
+    }
 
-        void add(const T& element)
+    const T& get(size_t index) const
+    {
+        return (index >= size) ? throw std::out_of_range("Index out of range!") : data[index];
+    }
+
+    size_t getSize() const
+    {
+        return size;
+    }
+
+    void sort()
+    {
+        // bubble sort array
+        for (size_t i = 0; i < size - 1; ++i)
         {
-            if (size == count)
+            for (size_t j = 0; j < size - i - 1; ++j)
             {
-                resize();
+                if (data[j] > data[j + 1])
+                {
+                    T temp = data[j];
+                    data[j] = data[j + 1];
+                    data[j + 1] = temp;
+                }
             }
-            data[size++] = element;
         }
+    }
 
-        const T& get(size_t index) const
+private:
+    void resize()
+    {
+        count *= 2;
+        T* newData = new T[count];
+        for (size_t i = 0; i < size; ++i)
         {
-            return (index >= size) ? throw std::out_of_range("Index out of range!") : data[index];
+            newData[i] = data[i];
         }
-
-        size_t getSize() const
-        {
-            return size;
-        }
-
-    private:
-        void resize()
-        {
-            count *= 2;
-            T* newData = new T[count];
-            for (size_t i = 0; i < size; ++i)
-            {
-                newData[i] = data[i];
-            }
-            delete[] data;
-            data = newData;
-        }
+        delete[] data;
+        data = newData;
+    }
 };
 
 int main()
