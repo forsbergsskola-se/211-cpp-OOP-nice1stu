@@ -70,5 +70,30 @@ namespace DynamicArrayUnitTest
             Assert::AreEqual(arr.get(4), 101);
         }
 
+        TEST_METHOD(TestDoubleArrayAverage)
+        {
+            DynamicArray<double> doubleArray(10);
+            doubleArray.add(1.0);
+            doubleArray.add(2.0);
+            doubleArray.add(3.0);
+
+            double expectedAverage = 2.0;
+            double actualAverage = average(doubleArray);
+
+            Assert::AreEqual(expectedAverage, actualAverage);
+        }
+
+        TEST_METHOD(TestIntArrayAverage)
+        {
+            DynamicArray<int> integerArray(10);
+            integerArray.add(1);
+            integerArray.add(2);
+            integerArray.add(3);
+
+            double expectedAverage = 2.0;
+            double actualAverage = average(integerArray);
+
+            Assert::AreEqual(expectedAverage, actualAverage);
+        }
     };
 }

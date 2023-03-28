@@ -53,6 +53,12 @@ public:
         }
     }
 
+    template<typename U>
+    U narrow_cast(size_t index) const
+    {
+        return static_cast<U>(get(index));
+    }
+
 private:
     void resize()
     {
@@ -66,6 +72,27 @@ private:
         data = newData;
     }
 };
+
+// EXERCISE: average
+double average(const DynamicArray<double>& arr)
+{
+    double sum = 0.0;
+    for (size_t i = 0; i < arr.getSize(); ++i)
+    {
+        sum += arr.get(i);
+    }
+    return sum / arr.getSize();
+}
+
+double average(const DynamicArray<int>& arr)
+{
+    double sum = 0.0;
+    for (size_t i = 0; i < arr.getSize(); ++i)
+    {
+        sum += arr.get(i);
+    }
+    return sum / arr.getSize();
+}
 
 int main()
 {
