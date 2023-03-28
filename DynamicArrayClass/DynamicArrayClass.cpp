@@ -31,7 +31,7 @@ public:
 
     const T& get(size_t index) const
     {
-        return (index >= size) ? throw std::out_of_range("Index out of range!") : data[index];
+        return (index >= size) ? throw out_of_range("Index out of range!") : data[index];
     }
 
     size_t getSize() const
@@ -41,16 +41,13 @@ public:
 
     void sort()
     {
-        // bubble sort array
         for (size_t i = 0; i < size - 1; ++i)
         {
             for (size_t j = 0; j < size - i - 1; ++j)
             {
                 if (data[j] > data[j + 1])
                 {
-                    T temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
+                    swap(data[j], data[j + 1]);
                 }
             }
         }
