@@ -2,6 +2,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <cstdio>
+#include "Header.h"
 
 using namespace std;
 
@@ -23,10 +24,12 @@ class DynamicArray
 
         void add(const T& element)
         {
-            size == count ? resize() : void();
-            data[++size] = element;
+            if (size == count)
+            {
+                resize();
+            }
+            data[size++] = element;
         }
-
 
         const T& get(size_t index) const
         {
@@ -51,3 +54,8 @@ class DynamicArray
             data = newData;
         }
 };
+
+int main()
+{
+    return 0;
+}
